@@ -1,54 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Login | WASE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
 <div class="container">
-  <div class="card auth-card">
-    <h2>Sign in</h2>
+  <div class="card">
+    <h2>Login</h2>
 
     <input id="phone" placeholder="Phone number">
     <input id="password" type="password" placeholder="Password">
 
     <button class="btn-primary" onclick="login()">Login</button>
-
-    <p class="muted">
-      New customer?
-      <a href="signup.html">Create your account</a>
-    </p>
+    <p>New? <a href="signup.html">Sign up</a></p>
   </div>
 </div>
 
 <script>
-/* 🔁 USE YOUR LATEST DEPLOYED /exec URL */
-const API = "https://script.google.com/macros/s/AKfycbxv4KLNaAvQcvi71r1pQiJZPIUALwV2g5DsF8MRTDYi5iB6HV1a-wHrNmRgXw9TGeqm/exec";
+const API = "https://script.google.com/macros/s/AKfycbyj4yPuQyJkLjy8kpXRs1cZZ3rZmxHSKwKTG6KHzLQ2QtpcJWw8q_bMW5esfYvhVAWQ/exec";
 
 function login() {
-  const p = phone.value.trim();
-  const pw = password.value.trim();
-
-  if (!p || !pw) {
-    alert("Enter phone and password");
-    return;
-  }
-
-  fetch(`${API}?action=login&phone=${encodeURIComponent(p)}&password=${encodeURIComponent(pw)}`)
+  fetch(`${API}?action=login&phone=${phone.value}&password=${password.value}`)
     .then(r => r.json())
     .then(d => {
       if (d.success) {
         sessionStorage.setItem("auth", "true");
-        sessionStorage.setItem("phone", p);
+        sessionStorage.setItem("phone", phone.value);
         location.href = "products.html";
       } else {
-        alert("Invalid phone or password");
+        alert("Invalid login");
       }
-    })
-    .catch(() => alert("Network error"));
+    });
 }
 </script>
 
