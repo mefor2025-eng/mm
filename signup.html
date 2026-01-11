@@ -1,37 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="assets/style.css">
+<meta charset="UTF-8">
+<title>Signup</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
+<header class="header">Signup</header>
+
 <div class="container">
-  <div class="card">
-    <h2>Sign Up</h2>
-
-    <input id="phone" placeholder="Phone number">
-    <input id="password" type="password" placeholder="Password">
-
-    <button class="btn-primary" onclick="signup()">Create</button>
-    <p>Already have an account? <a href="index.html">Login</a></p>
-  </div>
+  <input id="name" placeholder="Full Name">
+  <input id="phone" placeholder="Phone">
+  <input id="password" type="password" placeholder="Password">
+  <textarea id="address" placeholder="Address"></textarea>
+  <input id="city" placeholder="City">
+  <input id="pincode" placeholder="Pincode">
+  <button onclick="signup()">Create Account</button>
 </div>
 
 <script>
 const API = "https://script.google.com/macros/s/AKfycbyj4yPuQyJkLjy8kpXRs1cZZ3rZmxHSKwKTG6KHzLQ2QtpcJWw8q_bMW5esfYvhVAWQ/exec";
 
 function signup() {
-  fetch(`${API}?action=signup&phone=${phone.value}&password=${password.value}`)
-    .then(r => r.json())
-    .then(d => {
-      if (d.success) {
-        alert("Sign up successful");
-        location.href = "index.html";
-      } else {
-        alert("Phone already exists");
-      }
-    });
+  fetch(API + `?action=signup&name=${name.value}&phone=${phone.value}&password=${password.value}&address=${address.value}&city=${city.value}&pincode=${pincode.value}`)
+  .then(r => r.json())
+  .then(res => {
+    if (res.success) location.href = "login.html";
+    else alert(res.message);
+  });
 }
 </script>
 
