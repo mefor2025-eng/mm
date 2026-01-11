@@ -2,37 +2,23 @@
 <html>
 <head>
   <title>Product</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+<header><a href="products.html">← Back</a></header>
 
-<header class="mobile-header">
-  <a href="products.html">← Back</a>
-</header>
+<div class="container">
+  <div class="main-image" id="main"></div>
+  <div class="gallery" id="thumbs"></div>
 
-<div class="product-page">
-  <div class="gallery">
-    <img id="mainImage">
-    <div id="thumbs"></div>
-  </div>
+  <h2 id="title"></h2>
+  <div class="price" id="price"></div>
+  <p id="desc"></p>
 
-  <div class="details">
-    <h2 id="name"></h2>
-    <p class="price" id="price"></p>
-    <p id="desc"></p>
-    <button onclick="addToCart()">Buy Now</button>
-  </div>
+  <button onclick="location.href='cart.html'">Buy Now</button>
 </div>
 
-<h3 class="section-title">Similar Products</h3>
-<section class="grid" id="similar"></section>
-
 <script src="assets/app.js"></script>
-<script>
-loadProduct();
-loadProducts("similar");
-</script>
-
+<script>loadProduct();</script>
 </body>
 </html>
