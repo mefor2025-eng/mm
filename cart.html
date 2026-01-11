@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Checkout</title>
-  <link rel="stylesheet" href="assets/style.css">
-</head>
+<head><link rel="stylesheet" href="assets/style.css"></head>
 <body>
-<header><a href="products.html">← Shop</a></header>
-
-<div class="container">
-  <h2>Delivery Details</h2>
-  <input id="name" placeholder="Full Name">
-  <input id="phone" placeholder="Phone Number">
-  <textarea id="address" placeholder="Address"></textarea>
-  <input id="city" placeholder="City">
-  <input id="pincode" placeholder="Pincode">
-  <button onclick="placeOrder()">Place Order</button>
-</div>
+<h2>Checkout</h2>
+<input id="name" placeholder="Name">
+<input id="phone" placeholder="Phone">
+<textarea id="address" placeholder="Address"></textarea>
+<input id="city" placeholder="City">
+<input id="pin" placeholder="Pincode">
+<button class="btn" onclick="order()">Place Order</button>
 
 <script src="assets/app.js"></script>
+<script>
+function order(){
+const data={
+action:"order",
+name:name.value, phone:phone.value,
+address:address.value, city:city.value,
+pincode:pin.value,
+items:qs("id"), total:""
+};
+fetch(API+"?"+new URLSearchParams(data))
+.then(r=>r.json()).then(()=>{
+window.open(`https://wa.me/919847420195?text=New Order%0A${name.value}%0A${phone.value}`,"_blank");
+alert("Order placed");
+});
+}
+</script>
 </body>
 </html>
