@@ -1,6 +1,9 @@
 const qs = q => document.querySelector(q);
 const qsa = q => document.querySelectorAll(q);
 
+// assets/app.js (top)
+const APP_URL = "https://script.google.com/macros/s/AKfycbyj4yPuQyJkLjy8kpXRs1cZZ3rZmxHSKwKTG6KHzLQ2QtpcJWw8q_bMW5esfYvhVAWQ/exec";
+
 function getParam(name) {
   return new URLSearchParams(location.search).get(name);
 }
