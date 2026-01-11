@@ -1,37 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Signup</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="assets/style.css">
+  <title>Signup</title>
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
-<header class="header">Signup</header>
+<h2>Create Account</h2>
 
-<div class="container">
-  <input id="name" placeholder="Full Name">
-  <input id="phone" placeholder="Phone">
-  <input id="password" type="password" placeholder="Password">
-  <textarea id="address" placeholder="Address"></textarea>
-  <input id="city" placeholder="City">
-  <input id="pincode" placeholder="Pincode">
-  <button onclick="signup()">Create Account</button>
-</div>
+<input id="phone" placeholder="Phone">
+<input id="password" type="password" placeholder="Password">
+<input id="name" placeholder="Name">
+<textarea id="address" placeholder="Address"></textarea>
+<input id="city" placeholder="City">
+<input id="pincode" placeholder="Pincode">
 
-<script>
-const API = "https://script.google.com/macros/s/AKfycbyj4yPuQyJkLjy8kpXRs1cZZ3rZmxHSKwKTG6KHzLQ2QtpcJWw8q_bMW5esfYvhVAWQ/exec";
+<button onclick="signup()">Signup</button>
 
-function signup() {
-  fetch(API + `?action=signup&name=${name.value}&phone=${phone.value}&password=${password.value}&address=${address.value}&city=${city.value}&pincode=${pincode.value}`)
-  .then(r => r.json())
-  .then(res => {
-    if (res.success) location.href = "login.html";
-    else alert(res.message);
-  });
-}
-</script>
-
+<script src="assets/app.js"></script>
 </body>
 </html>
