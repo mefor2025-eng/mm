@@ -2,26 +2,17 @@
 <html>
 <head><link rel="stylesheet" href="assets/style.css"></head>
 <body>
-<div class="main" id="main"></div>
+
+<div id="main"></div>
 <div class="gallery" id="thumbs"></div>
 
 <h2 id="name"></h2>
-<div class="price" id="price"></div>
+<div id="price"></div>
 <p id="desc"></p>
 
-<button onclick="buy()">Buy Now</button>
-<button onclick="toggleWish(qs('id'))">❤️ Wishlist</button>
+<button onclick="location.href='cart.html'">Buy Now</button>
 
 <script src="assets/app.js"></script>
-<script>
-fetch(API+"?action=product&id="+qs("id")).then(r=>r.json()).then(p=>{
-name.textContent=p.name; price.textContent="₹"+p.price; desc.textContent=p.desc;
-const imgs=p.images.filter(Boolean);
-main.innerHTML=`<img src="${imgs[0]}" onerror="hideBroken(this)">`;
-thumbs.innerHTML=imgs.map(i=>`<img src="${i}" onclick="main.innerHTML='<img src=\\'${i}\\'>'">`).join("");
-localStorage.setItem("cart",JSON.stringify(p));
-});
-function buy(){ location.href="cart.html"; }
-</script>
+<script>loadProduct();</script>
 </body>
 </html>
