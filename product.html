@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Product – WASE</title>
+  <title>Product</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
-<header class="topbar">
+<header class="mobile-header">
   <a href="products.html">← Back</a>
 </header>
 
@@ -17,20 +18,20 @@
   </div>
 
   <div class="details">
-    <h1 id="name"></h1>
+    <h2 id="name"></h2>
     <p class="price" id="price"></p>
     <p id="desc"></p>
-
-    <button onclick="addToCart()">Add to Cart</button>
+    <button onclick="addToCart()">Buy Now</button>
   </div>
 </div>
 
-<h3 class="similar-title">Similar Products</h3>
+<h3 class="section-title">Similar Products</h3>
 <section class="grid" id="similar"></section>
 
 <script src="assets/app.js"></script>
 <script>
 loadProduct();
+loadProducts("similar");
 </script>
 
 </body>
