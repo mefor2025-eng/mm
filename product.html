@@ -1,71 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Product</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="assets/style.css">
+<meta charset="UTF-8">
+<title>Product</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
-<div class="container amazon-product">
+<header class="header">Product</header>
 
-  <div class="amazon-images">
-    <div class="amazon-thumbs" id="thumbs"></div>
-    <div class="amazon-main" id="mainImage"></div>
-  </div>
-
-  <div>
-    <h1 id="productName"></h1>
-    <div class="price" id="productPrice"></div>
-    <div class="amazon-stock">In stock</div>
-
-    <div class="amazon-actions">
-      <button class="btn-primary" onclick="addToCart()">Add to Cart</button>
-      <button class="btn-secondary" onclick="buyNow()">Buy Now</button>
-    </div>
-
-    <p id="productDesc"></p>
-  </div>
-
-</div>
+<div class="container" id="product"></div>
 
 <script>
 const API = "https://script.google.com/macros/s/AKfycbyj4yPuQyJkLjy8kpXRs1cZZ3rZmxHSKwKTG6KHzLQ2QtpcJWw8q_bMW5esfYvhVAWQ/exec";
 const id = new URLSearchParams(location.search).get("id");
-if (!id) location.href = "products.html";
-
-let product;
 
 fetch(API + "?action=product&id=" + id)
 .then(r => r.json())
 .then(p => {
-  product = p;
-  productName.innerText = p[1];
-  productPrice.innerText = "₹" + p[2];
-  productDesc.innerText = p[3];
+  if (!p[0]) {
+    document.getElementById("product").innerHTML = "Product not found";
+    return;
+  }
 
-  const imgs = p[6].split(",");
-  mainImage.innerHTML = `<img src="${imgs[0]}">`;
-  thumbs.innerHTML = imgs.map(i =>
-    `<img src="${i}" onclick="show('${i}')">`
-  ).join("");
+  document.getElementById("product").innerHTML = `
+    <div class="product-page">
+      <img src="${p[6].split(',')[0]}" class="product-img">
+      <div>
+        <h2>${p[1]}</h2>
+        <h3>₹${p[2]}</h3>
+        <p>${p[3]}</p>
+        <a href="cart.html?id=${p[0]}" class="btn">Buy Now</a>
+      </div>
+    </div>
+  `;
 });
-
-function show(src){
-  mainImage.innerHTML = `<img src="${src}">`;
-}
-
-function addToCart(){
-  sessionStorage.setItem("cart", JSON.stringify([product]));
-  location.href = "cart.html";
-}
-
-function buyNow(){
-  addToCart();
-}
 </script>
 
 </body>
 </html>
-
-
