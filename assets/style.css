@@ -2,70 +2,77 @@
 body{margin:0;background:#fff;color:#000}
 a{text-decoration:none;color:inherit}
 
+/* HEADER */
 header{
   position:sticky;top:0;z-index:10;
   background:#fff;border-bottom:1px solid #eee;
   display:flex;justify-content:space-between;
   align-items:center;padding:12px;
 }
-
 .logo{font-weight:700}
 
+/* HERO / POSTER */
 .hero{
   background:#000;color:#fff;
-  padding:40px 16px;text-align:center;
+  padding:50px 16px;
+  text-align:center;
+}
+.hero h1{margin:0 0 6px}
+
+/* OFFER STRIP */
+.offer-strip{
+  display:flex;
+  overflow-x:auto;
+  gap:12px;
+  padding:14px;
+}
+.offer{
+  min-width:280px;
+  background:#111;
+  color:#fff;
+  border-radius:14px;
+  padding:20px;
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-  gap:14px;padding:14px;
+/* SECTION */
+.section{
+  padding:14px;
+}
+.section h2{
+  margin-bottom:10px;
 }
 
+/* PRODUCT ROW */
+.row{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+}
 .card{
+  min-width:160px;
   border:1px solid #eee;
-  border-radius:10px;
+  border-radius:12px;
   overflow:hidden;
 }
-
 .card img{
   width:100%;
   height:180px;
   object-fit:cover;
 }
-
-.card .info{padding:10px}
-
+.card .info{
+  padding:10px;
+}
 .price{font-weight:600}
 
-input,textarea,button{
-  width:100%;
-  padding:12px;
-  margin:8px 0;
-  border-radius:8px;
-  border:1px solid #ccc;
+/* GRID (SHOP PAGE) */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:14px;
+  padding:14px;
 }
 
-button{
-  background:#000;
-  color:#fff;
-  border:none;
-}
-
-.gallery{
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  margin:10px 0;
-}
-
-.gallery img{
-  width:64px;
-  height:64px;
-  object-fit:cover;
-  border-radius:6px;
-}
-
+/* MOBILE NAV */
 .bottom-nav{
   display:none;
   position:fixed;
@@ -78,4 +85,8 @@ button{
 
 @media(max-width:768px){
   .bottom-nav{display:flex}
+}
+
+@media(min-width:1024px){
+  .row{overflow-x:hidden}
 }
