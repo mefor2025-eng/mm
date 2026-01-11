@@ -1,20 +1,18 @@
+<!-- login.html -->
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Login</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="assets/style.css">
-</head>
+<head><link rel="stylesheet" href="assets/style.css"></head>
 <body>
-
 <h2>Login</h2>
-
 <input id="phone" placeholder="Phone">
 <input id="password" type="password" placeholder="Password">
-<button onclick="login()">Login</button>
-
-<p>No account? <a href="signup.html">Signup</a></p>
-
+<button onclick="go()">Login</button>
 <script src="assets/app.js"></script>
+<script>
+function go(){
+fetch(API+"?action=login&phone="+phone.value+"&password="+password.value)
+.then(r=>r.json()).then(j=>j.success?alert("Logged in"):alert(j.error));
+}
+</script>
 </body>
 </html>
