@@ -1,20 +1,81 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>WASE</title>
+<title>WASE – Premium Store</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="assets/style.css">
+<style>
+.hero {
+  height: 80vh;
+  background: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+    url("https://images.unsplash.com/photo-1600185365483-26d7a4cc7519");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+.hero div {
+  padding: 40px;
+}
+.hero h1 { font-size: 38px; }
+.hero p { margin: 15px 0 25px; opacity: .9; }
+.hero a {
+  background: #fff;
+  color: #000;
+  padding: 14px 28px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+</style>
 </head>
+
 <body>
 
-<header class="header">WASE</header>
+<header class="header">
+  <b>WASE</b>
+  <nav>
+    <a href="products.html">Shop</a>
+    <a href="login.html">Login</a>
+  </nav>
+</header>
 
 <section class="hero">
-  <h1>Premium Minimal Products</h1>
-  <p>New Drops · Limited Stock</p>
-  <a href="products.html" class="btn">Shop Now</a>
+  <div>
+    <h1>New Season Offers</h1>
+    <p>Minimal • Premium • Trusted</p>
+    <a href="products.html">Shop Now</a>
+  </div>
 </section>
+
+<div class="container">
+  <h2>Best Sellers</h2>
+  <div class="products" id="best"></div>
+
+  <h2 style="margin-top:40px">New Arrivals</h2>
+  <div class="products" id="new"></div>
+</div>
+
+<script>
+const API = "https://script.google.com/macros/s/AKfycbyj4yPuQyJkLjy8kpXRs1cZZ3rZmxHSKwKTG6KHzLQ2QtpcJWw8q_bMW5esfYvhVAWQ/exec";
+
+fetch(API+"?action=products")
+.then(r=>r.json())
+.then(d=>{
+  document.getElementById("best").innerHTML =
+    d.slice(0,4).map(p=>card(p)).join("");
+  document.getElementById("new").innerHTML =
+    d.slice(-4).map(p=>card(p)).join("");
+});
+
+function card(p){
+  return `
+  <div class="card" onclick="location.href='product.html?id=${p[0]}'">
+    <img src="${p[6].split(',')[0]}">
+    <h3>${p[1]}</h3>
+    <p>₹${p[2]}</p>
+  </div>`;
+}
+</script>
 
 </body>
 </html>
