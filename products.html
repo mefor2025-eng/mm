@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Products</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="assets/style.css">
+<meta charset="UTF-8">
+<title>Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
-<div class="container">
-  <div class="grid" id="list"></div>
-</div>
+<header class="header">Shop</header>
+
+<div class="container grid" id="products"></div>
 
 <script>
 const API = "https://script.google.com/macros/s/AKfycbyj4yPuQyJkLjy8kpXRs1cZZ3rZmxHSKwKTG6KHzLQ2QtpcJWw8q_bMW5esfYvhVAWQ/exec";
@@ -17,14 +18,12 @@ const API = "https://script.google.com/macros/s/AKfycbyj4yPuQyJkLjy8kpXRs1cZZ3rZ
 fetch(API + "?action=products")
 .then(r => r.json())
 .then(data => {
-  document.getElementById("list").innerHTML = data.map(p => `
+  document.getElementById("products").innerHTML = data.map(p => `
     <div class="card">
       <img src="${p[6].split(',')[0]}">
       <h3>${p[1]}</h3>
-      <div class="price">₹${p[2]}</div>
-      <a href="product.html?id=${encodeURIComponent(p[0])}">
-        <button class="btn-secondary">View Product</button>
-      </a>
+      <p>₹${p[2]}</p>
+      <a class="link" href="product.html?id=${p[0]}">View Product</a>
     </div>
   `).join("");
 });
@@ -32,5 +31,3 @@ fetch(API + "?action=products")
 
 </body>
 </html>
-
-
