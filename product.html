@@ -4,23 +4,17 @@
 <title>Product</title>
 <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
+<body onload="loadProduct()">
+<header><a href="products.html">← Back</a></header>
 
-<div id="box"></div>
+<div class="container">
+  <div id="media"></div>
+  <h2 id="title"></h2>
+  <h3 id="price"></h3>
+  <p id="desc"></p>
+  <button onclick="location.href='cart.html'">Buy Now</button>
+</div>
 
-<script>
-const id=new URLSearchParams(location.search).get("id");
-fetch(API+"?action=product&id="+id)
-.then(r=>r.json())
-.then(p=>{
-  box.innerHTML=`
-    ${p.images.map(i=>`<img src="${i}" style="width:100%">`).join("")}
-    <h2>${p.name}</h2>
-    <p>₹${p.price}</p>
-    <p>${p.desc}</p>
-    <a href="cart.html?id=${p.id}"><button>Buy Now</button></a>
-  `;
-});
-</script>
+<script src="assets/app.js"></script>
 </body>
 </html>
