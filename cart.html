@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head><link rel="stylesheet" href="assets/style.css"></head>
+<head>
+<title>Checkout</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
 <body>
 
-<h2>Checkout</h2>
-<input id="name" placeholder="Name">
-<input id="phone" placeholder="Phone">
-<textarea id="address" placeholder="Address"></textarea>
-<input id="city" placeholder="City">
-<input id="pincode" placeholder="Pincode">
+<form onsubmit="order(event)">
+<input placeholder="Name" required>
+<input placeholder="Phone" required>
+<textarea placeholder="Address" required></textarea>
+<button>Place Order</button>
+</form>
 
-<button onclick="placeOrder()">Place Order on WhatsApp</button>
-
-<script src="assets/app.js"></script>
+<script>
+function order(e){
+  e.preventDefault();
+  window.open("https://wa.me/919847420195","_blank");
+}
+</script>
 </body>
 </html>
