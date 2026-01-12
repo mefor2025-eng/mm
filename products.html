@@ -3,18 +3,12 @@
 <head><link rel="stylesheet" href="assets/style.css"></head>
 <body>
 
-<header><div class="logo">Shop</div></header>
-<div class="grid" id="list"></div>
-
-<div class="bottom-nav">
-  <a href="index.html">Home</a>
-  <a href="products.html">Shop</a>
-  <a href="login.html">Login</a>
-</div>
+<header>All Products</header>
+<div class="grid" id="products"></div>
 
 <script src="assets/app.js"></script>
 <script>
-getProducts().then(p=>list.innerHTML=p.map(productCard).join(""));
+loadProducts(document.getElementById("products"));
 </script>
 
 </body>
