@@ -1,18 +1,57 @@
 <!DOCTYPE html>
 <html>
-<head><link rel="stylesheet" href="assets/style.css"></head>
+<head>
+  <title>Login – WASE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
 <body>
 
-<h2>Login</h2>
-<input id="phone" placeholder="Phone">
-<input id="password" type="password" placeholder="Password">
-<button onclick="go()">Login</button>
+<header>
+  <b>WASE</b>
+  <a href="signup.html">Signup</a>
+</header>
+
+<div class="container">
+  <h2>Login</h2>
+
+  <input id="phone" placeholder="Phone number">
+  <input id="password" type="password" placeholder="Password">
+
+  <button onclick="login()">Login</button>
+</div>
+
+<div class="bottom-nav">
+  <a href="index.html">🏠</a>
+  <a href="products.html">🛒</a>
+</div>
 
 <script>
-function go(){
-  fetch(APP_URL+"?action=login&phone="+phone.value+"&password="+password.value)
-  .then(r=>r.json()).then(j=>alert(j.success?"Login success":j.error));
+const API="https://script.google.com/macros/s/AKfycbyj4yPuQyJkLjy8kpXRs1cZZ3rZmxHSKwKTG6KHzLQ2QtpcJWw8q_bMW5esfYvhVAWQ/exec";
+
+function login(){
+  const phone=phoneInput.value.trim();
+  const password=passwordInput.value.trim();
+
+  if(!phone||!password){
+    alert("All fields required");
+    return;
+  }
+
+  fetch(`${API}?action=login&phone=${phone}&password=${password}`)
+    .then(r=>r.json())
+    .then(res=>{
+      if(res.success){
+        localStorage.setItem("phone",phone);
+        location.href="products.html";
+      }else{
+        alert("Invalid login");
+      }
+    });
 }
+
+const phoneInput=document.getElementById("phone");
+const passwordInput=document.getElementById("password");
 </script>
 
 </body>
