@@ -2,17 +2,22 @@
 <html>
 <head><link rel="stylesheet" href="assets/style.css"></head>
 <body>
+
 <h2>My Orders</h2>
-<div id="o"></div>
-<script src="assets/app.js"></script>
+<div id="orders"></div>
+
 <script>
-const phone=prompt("Enter phone to view orders");
-fetch(API+"?action=orders&phone="+phone).then(r=>r.json()).then(d=>{
-o.innerHTML=d.map(x=>`
-<div class="card">
-<b>${x[0]}</b><br>${x[6]}<br>₹${x[7]}<br>${x[8]}
-</div>`).join("");
+const phone=prompt("Enter phone number");
+fetch(APP_URL+"?action=orders&phone="+phone)
+.then(r=>r.json()).then(d=>{
+  orders.innerHTML=d.map(o=>`
+    <div class="card">
+      ${o.orderId}<br>
+      ₹${o.total}<br>
+      ${o.status}
+    </div>`).join("");
 });
 </script>
+
 </body>
 </html>
