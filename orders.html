@@ -1,22 +1,54 @@
 <!DOCTYPE html>
 <html>
-<head><link rel="stylesheet" href="assets/style.css"></head>
+<head>
+  <title>My Orders – WASE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
 <body>
 
-<h2>My Orders</h2>
-<div id="orders"></div>
+<header>
+  <b>My Orders</b>
+  <a href="products.html">Shop</a>
+</header>
+
+<div class="container">
+  <div id="orders"></div>
+</div>
+
+<div class="bottom-nav">
+  <a href="index.html">🏠</a>
+  <a href="products.html">🛒</a>
+</div>
 
 <script>
-const phone=prompt("Enter phone number");
-fetch(APP_URL+"?action=orders&phone="+phone)
-.then(r=>r.json()).then(d=>{
-  orders.innerHTML=d.map(o=>`
-    <div class="card">
-      ${o.orderId}<br>
-      ₹${o.total}<br>
-      ${o.status}
-    </div>`).join("");
-});
+const API="https://script.google.com/macros/s/AKfycbyj4yPuQyJkLjy8kpXRs1cZZ3rZmxHSKwKTG6KHzLQ2QtpcJWw8q_bMW5esfYvhVAWQ/exec";
+const phone=localStorage.getItem("phone");
+
+if(!phone){
+  location.href="login.html";
+}
+
+fetch(`${API}?action=orders&phone=${phone}`)
+  .then(r=>r.json())
+  .then(data=>{
+    if(!data.length){
+      orders.innerHTML="<p>No orders found</p>";
+      return;
+    }
+
+    orders.innerHTML=data.map(o=>`
+      <div class="card">
+        <div class="card-body">
+          <b>Order ID:</b> ${o[0]}<br>
+          <b>Total:</b> ₹${o[7]}<br>
+          <b>Status:</b> ${o[8]}
+        </div>
+      </div>
+    `).join("");
+  });
+
+const orders=document.getElementById("orders");
 </script>
 
 </body>
