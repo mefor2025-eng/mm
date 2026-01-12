@@ -5,19 +5,13 @@
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-
-<form onsubmit="order(event)">
-<input placeholder="Name" required>
-<input placeholder="Phone" required>
-<textarea placeholder="Address" required></textarea>
-<button>Place Order</button>
-</form>
-
-<script>
-function order(e){
-  e.preventDefault();
-  window.open("https://wa.me/919847420195","_blank");
-}
-</script>
+<header>Checkout</header>
+<div class="container">
+  <input id="name" placeholder="Full Name">
+  <input id="phone" placeholder="Phone">
+  <textarea id="address" placeholder="Full Address"></textarea>
+  <button onclick="placeOrder()">Place Order</button>
+</div>
+<script src="assets/app.js"></script>
 </body>
 </html>
