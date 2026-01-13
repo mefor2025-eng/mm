@@ -1,30 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
 <title>WASE</title>
 <link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js"></script>
 </head>
 <body>
 
-<header>
-  <b>WASE</b>
-  <a href="login.html">Login</a>
-</header>
+<header>WASE</header>
 
-<div class="poster">Offer poster image will be placed here</div>
+<div class="banner">Offer poster slider will be placed here</div>
 
-<div class="container">
-  <h3>Featured Products</h3>
-  <div class="grid" id="list"></div>
-</div>
+<section class="grid" id="featured"></section>
 
-<div class="bottom-nav">
-  <a href="index.html">🏠</a>
-  <a href="products.html">🛒</a>
-  <a href="orders.html">📦</a>
-</div>
+<script>
+loadProducts(document.getElementById("featured"),6);
+</script>
 
-<script src="assets/app.js"></script>
-<script>loadProducts(document.getElementById("list"))</script>
 </body>
 </html>
