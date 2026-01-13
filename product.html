@@ -1,20 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
 <title>Product</title>
 <link rel="stylesheet" href="assets/style.css">
-</head>
-<body onload="loadProduct()">
-<header><a href="products.html">← Back</a></header>
-
-<div class="container">
-  <div id="media"></div>
-  <h2 id="title"></h2>
-  <h3 id="price"></h3>
-  <p id="desc"></p>
-  <button onclick="location.href='cart.html'">Buy Now</button>
-</div>
-
 <script src="assets/app.js"></script>
+</head>
+<body>
+
+<header>Product</header>
+<div id="view"></div>
+
+<script>
+const id=new URLSearchParams(location.search).get("id");
+fetch(API+"?action=product&id="+id)
+.then(r=>r.json())
+.then(p=>{
+  view.innerHTML=`
+    <img src="${p.images[0]||''}" style="width:100%">
+    <h2>${p.name}</h2>
+    <p>${p.desc}</p>
+    <h3>₹${p.price}</h3>
+    <button onclick='addToCart(${JSON.stringify(p)})'>Buy Now</button>
+  `;
+});
+</script>
+
 </body>
 </html>
