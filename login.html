@@ -1,57 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Login – WASE</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="assets/style.css">
+<meta charset="UTF-8">
+<title>Login | WASE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js"></script>
 </head>
 <body>
 
-<header>
-  <b>WASE</b>
-  <a href="signup.html">Signup</a>
-</header>
+<header>Login</header>
 
-<div class="container">
-  <h2>Login</h2>
-
-  <input id="phone" placeholder="Phone number">
+<div class="grid" style="max-width:420px;margin:auto">
+  <input id="phone" placeholder="Phone number" inputmode="numeric">
   <input id="password" type="password" placeholder="Password">
-
   <button onclick="login()">Login</button>
-</div>
 
-<div class="bottom-nav">
-  <a href="index.html">🏠</a>
-  <a href="products.html">🛒</a>
+  <p style="text-align:center">
+    New user?
+    <a href="signup.html">Create account</a>
+  </p>
 </div>
 
 <script>
-const API="https://script.google.com/macros/s/AKfycbyj4yPuQyJkLjy8kpXRs1cZZ3rZmxHSKwKTG6KHzLQ2QtpcJWw8q_bMW5esfYvhVAWQ/exec";
-
 function login(){
-  const phone=phoneInput.value.trim();
-  const password=passwordInput.value.trim();
-
-  if(!phone||!password){
+  const phone = phone.value.trim();
+  const password = password.value.trim();
+  if(!phone || !password){
     alert("All fields required");
     return;
   }
 
-  fetch(`${API}?action=login&phone=${phone}&password=${password}`)
+  fetch(API + `?action=login&phone=${encodeURIComponent(phone)}&password=${encodeURIComponent(password)}`)
     .then(r=>r.json())
     .then(res=>{
       if(res.success){
-        localStorage.setItem("phone",phone);
-        location.href="products.html";
+        localStorage.setItem("user", JSON.stringify(res.user));
+        location.href = "products.html";
       }else{
-        alert("Invalid login");
+        alert(res.error || "Login failed");
       }
     });
 }
-
-const phoneInput=document.getElementById("phone");
-const passwordInput=document.getElementById("password");
 </script>
 
 </body>
